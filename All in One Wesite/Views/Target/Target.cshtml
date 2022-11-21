@@ -1,0 +1,65 @@
+﻿@using System.Text.RegularExpressions
+@{
+    ViewData["Title"] = "Target Page";
+    var table = ViewBag.Table;int total_mode = 0;
+    total_mode = ViewBag.total;
+    List<string> list = new List<string>() { "Stt", "SO number", "SO Dely date", "Export PTS", "Qty", "Carton", "GW", "CBM", "Po number", "Booking confirmation number" };
+}
+<html>
+    <head>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#table_id').DataTable();
+        });
+    </script>
+    </head>
+    <body>
+    <h1 style="font-size:25px;text-align:center">Total Qty in Booking Ontime: @total_mode EA</h1>
+    <link rel="stylesheet" type="text/css" href="/DataTables/datatables.css">
+    <script type="text/javascript" charset="utf8" src="/DataTables/datatables.js"></script>
+    <div class="Tbale">
+        <table id="table_id" style="position:center" border="1">
+            <thead>
+                <tr>
+                    @{
+                        foreach (var item in list)
+                        {
+                                                <th>@item.ToString()</th>
+                        }
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    if (table.Rows.Count > 1)
+                    {
+                        for (var i = 0; i < table.Rows.Count; i++)
+                        {
+                                                <tr>
+                                                    @{
+                                    foreach (var item in table.Rows[i].ItemArray)
+                                    {
+                                                                                <td>@item.ToString()</td>
+                                    }
+                                                    }
+                                                </tr>
+                        }
+                    }
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="download VGM">
+        <a asp-action="DownloadFileVGM" asp-controller="Target">VGM file zip</a>
+    </div>
+    <div class="download SI">
+        <a asp-action="DownloadFileSI" asp-controller="Target">SI file zip</a>
+    </div>
+    <div class="download PKL">
+        <a asp-action="DownloadFilePKL" asp-controller="Target">PKL file zip</a>
+    </div>
+    </body>
+</html>

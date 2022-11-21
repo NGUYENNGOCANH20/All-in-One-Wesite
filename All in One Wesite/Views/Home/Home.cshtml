@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+    string username = ViewBag.username;
+    int Spanx_Sale = ViewBag.list[1];
+    int Target_Sale = ViewBag.list[0];
+    int Wacoal_Sale = ViewBag.list[2];
+}
+<html lang="en">
+<head>
+  <title>Home Page</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="~/css/StyleSheet_home.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div style="background-color:white;position: fixed;z-index:1;">
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="https://vi-vn.facebook.com/deltagalilvietnam/">Deltagalil VN</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li><a onclick="" asp-action="Home" asp-controller="Home">Home</a></li>
+                        <li><a onclick="" asp-action="Spanx" asp-controller="Spanx">Spanx</a></li>
+                        <li><a onclick="" asp-action="Target" asp-controller="Target">Target</a></li>
+                        <li><a onclick="" asp-action="Wacoal" asp-controller="Wacoal">Wacoal</a></li>
+                        <li><a onclick="" asp-action="Carriers" asp-controller="Carriers">Carriers</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="~/Login/Login"><span class="glyphicon glyphicon-log-in"></span>Log out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid text-center">
+            <div class="row content">
+                <div class="col-sm-2 sidenav">
+                    <div>
+                        <p><a href="https://www.facebook.com/hayh07a">Facebook Admin Contact</a></p>
+                    </div>
+                    <div>
+                        <p><a onclick="window.open('mailto:nguyenngoc.anh@deltagalil.com');">Send Mail Contact</a></p>
+                    </div>
+                    <div>
+                        <p>Phone:0898192230</p>
+                    </div>
+
+                </div>
+                <div class="col-sm-8 text-left">
+                    <h1>Welcome @username</h1>
+                    <p>Total Sale @DateTime.Now.Month / @DateTime.Now.Year</p>
+                    <hr>
+                    <canvas id="myChart" width="400" height="400"></canvas>
+                    <script>
+                        const ctx = document.getElementById('myChart');
+                        const myChart = new Chart(ctx, {
+                            type: 'bar',
+                            data: {
+                                labels: ['Target', 'Spanx', 'Wacoal'],
+                                datasets: [{
+                                    label: 'DVT: Unit',
+                                    data: [@Target_Sale, @Spanx_Sale, @Wacoal_Sale],
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(255, 206, 86, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgba(255, 99, 132, 1)',
+                                        'rgba(54, 162, 235, 1)',
+                                        'rgba(255, 206, 86, 1)'
+                                    ],
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {
+                                scales: {
+                                    y: {
+                                        beginAtZero: true
+                                    }
+                                }
+                            }
+                        });
+                    </script>
+                </div>
+                <div class="col-sm-2 sidenav">
+                    <div class="well">
+                        <a href="https://www.ilovepdf.com/pdf_to_word"><p>Pdf to Word</p></a>
+                    </div>
+                    <div class="well">
+                        <a href="https://www.ilovepdf.com/pdf_to_excel"><p>Pdf to Excel</p></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="container-fluid text-center">
+            <p>CÔNG TY TNHH DELTA GALIL VIỆT NAM</p>
+            <br />
+            <p>MST:4101439432</p>
+            <br />
+            <p>Phu Kim - Phu Cat - Binh Dinh</p>
+        </footer>
+    </div>
+    <div style="opacity:20%;z-index:0;">
+        <canvas id="sky"></canvas>
+        <script>
+            window.onload = function () {
+                //get and store canvas & context
+                var canvas = document.getElementById("sky");
+                var ctx = canvas.getContext("2d");
+                var h = window.innerHeight;
+                var w = window.innerWidth;
+                //set dims to window
+                canvas.height = h;
+                canvas.width = w;
+                // Generate snowflakes
+                var mf = 100; // max flakes
+                var flakes = [];
+                // loop through the empty flakes
+                for (var i = 0; i < mf; i++) {
+
+                    flakes.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        r: Math.random() * 5 + 2, //min of 2px and max 7px
+                        d: Math.random() + 1  // density of flakes
+                    })
+                }
+                //draw flakes
+                function drawFlakes() {
+                    ctx.clearRect(0, 0, w, h);
+                    ctx.fillStyle = "white";
+                    ctx.beginPath();
+                    for (var i = 0; i < mf; i++) {
+                        var f = flakes[i];
+                        ctx.moveTo(f.x, f.y);
+                        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+                    }
+                    ctx.fill();
+                    moveFlakes();
+                }
+                //animate the flakes
+                var angle = 0;
+                function moveFlakes() {
+                    angle += 0.01;
+                    for (var i = 0; i < mf; i++) {
+                        //store the current flake
+                        var f = flakes[i];
+                        //Upadte Y and X coordinate of each snow
+                        f.y += Math.pow(f.d, 2) + 1;
+                        f.x += Math.sin(angle) * 2;
+                        //if the snow reach to the bottom send it to the top again
+                        if (f.y > h) {
+                            flakes[i] = { x: Math.random() * w, y: 0, r: f.r, d: f.d };
+                        }
+                    }
+                }
+                setInterval(drawFlakes, 25);
+            }
+        </script>
+    </div>
+</body>
+</html>
+

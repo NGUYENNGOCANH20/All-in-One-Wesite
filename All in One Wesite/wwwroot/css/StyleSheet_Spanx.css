@@ -1,0 +1,87 @@
+﻿* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    background-color:gainsboro;
+}
+
+.header {
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+}
+
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+    text-align:center;
+    lighting-color:blanchedalmond;
+    font-size:15px;
+}
+.topnav h1{
+    color:black;
+}
+
+    .topnav button {
+        float: left;
+        display: block;
+        color: forestgreen;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+.topnav button:hover {
+    background-color: #ddd;
+    color: black;
+}
+.column {
+    float: left;
+    padding: 10px;
+}
+table {
+    text-align: center;
+}
+    /* Left column */
+    .column.side {
+        width: 20%;
+    }
+.chartdonut {
+    height: auto;
+    float: left;
+    margin-bottom: 10px;
+}
+.scm {
+    margin-top: 15px;
+    position: static;
+}
+    .scm th, td {
+        font-size: 15px;
+    }
+    
+    .column.middle {
+        width: 80%;
+        text-align:center;
+    }
+.top {
+    position: static;
+    float: left;
+    width: 80%;
+}
+    .top th, td {
+        font-size: 12px;
+    }
+        
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .column.side, .column.middle {
+        width: 100%;
+    }
+}

@@ -1,0 +1,24 @@
+﻿@model ErrorViewModel
+@{
+    ViewData["Title"] = "Error";
+}
+
+<h1 class="text-danger">Error.</h1>
+<h2 class="text-danger">Request don't authorize</h2>
+
+@if (Model.ShowRequestId)
+{
+    <p>
+        <strong>Request ID:</strong> <code>@Model.RequestId</code>
+    </p>
+}
+
+<h3>Pls contact with admin for this issue</h3>
+<p>
+    <strong>Nguyen Ngoc Anh</strong>
+    <br />
+    Phone:0898192230
+    <br />
+    Mail: nguyenngoc.anh@deltagalil.com
+</p>
+

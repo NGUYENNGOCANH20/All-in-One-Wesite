@@ -1,0 +1,117 @@
+﻿
+@{
+    ViewData["Title"] = "H_Wacoal";
+    Layout = "~/Views/Wacoal/Wacoal_Layout.cshtml";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        @{
+            string Date_timefrom = $"{DateTime.Today.Year}-{DateTime.Today.Month}-{DateTime.Today.Day}";
+            string Date_timeto = $"{DateTime.Today.AddDays(28).Year}-{DateTime.Today.AddDays(28).Month}-{DateTime.Today.AddDays(28).Day}";
+            string link = $"https://ecomm.one-line.com/api/v1/schedule/point-to-point?porCode=VNCMP&delCode=USNYC&rcvTermCode=Y&deTermCode=Y&tsFlag=&fromDate={Date_timefrom}&toDate={Date_timeto}";
+        }
+        var data = '';
+        var mainurl = '';
+        window.addEventListener('load', (loca) => {
+            loca = window.location.href;
+            if (loca == 'https://ecomm.one-line.com/one-ecom') {
+                window.onload=function(){
+                    var link = '@link';
+                    const xhttp = new XMLHttpRequest();
+                    xhttp.open("GET", link.replaceAll('amp;', ''));
+                    xhttp.setRequestHeader('content-type', 'application/json; charset=utf-8');
+                    xhttp.send();
+                    xhttp.onload = function () {
+                        data = JSON.parse(xhttp.response);
+                    }
+                    window.location = mainurl;
+                }; 
+            }
+            else
+            {
+                    function CreateElement(chiud, type, mother) 
+                    {
+                    var node = document.createElement(type);
+                    var textnode = document.createTextNode(chiud);
+                    node.appendChild(textnode);
+                    mother.appendChild(node);
+                    }
+                    for (let item of data['scheduleLines']) 
+                    {
+                        var moder = document.createElement("tr");
+                        CreateElement(item.sailInfo[0].vvdName, "td", moder);
+                        CreateElement(item.polDepartureDate, "td", moder);
+                        CreateElement(item.dct, "td", moder);
+                        CreateElement(item.vgmCct, "td", moder);
+                        CreateElement(item.totalTransitTime, "td", moder);
+                        document.getElementById('bodyatable').appendChild(moder);
+                    }
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>ONE LINE CHECKING</h1>
+    <br />
+    <div class="one_checkingplan plan">
+        <div width="100%" height="270px">
+            <h1 style="text-align:left;font-size:25px">List Vessel From Date Today to Date: @DateTime.Today.AddDays(28).ToShortDateString()</h1>
+            <h1 style="text-align:left;font-size:10px;color:red">(Thông tin được lấy trực tiếp từ Website của hãng tàu mang tính tham khảo)</h1>
+            <style>
+                table{
+                    position:center;
+                    border: 1px solid;
+                    text-align: center;
+                    font-size: 15px;
+                }
+                th, td {
+                    border: 1px solid;
+                    text-align:center;
+                    font-size:15px;
+                }
+            </style>
+            <h1>Lỗi xác thực tài khoản được quyền truy cập Oneline - Pls contact admin to fix</h1>
+            <table id="bodyatable" >
+                <tr>
+                    <th colspan="1">Vessel name <br /> ( Tên Tàu )</th>
+                    <th colspan="1">ETD <br />  ( Ngày Tàu Chạy )</th>
+                    <th colspan="1">Document Cut Off <br />  ( Time phải submit PKL_INV_SI cho FWD )</th>
+                    <th colspan="1">VGM Cut Off <br /> ( Ngày hạ cont tại Cảng / sau Ex _factorydate 2 ngày )</th>
+                    <th colspan="1">Total Transit Time</th>
+                </tr>
+            </table>
+            <script>
+                function Redirect(linkredi) {
+                    window.location = linkredi;
+                }
+                function loaddatavalue(){
+                    mainurl = window.location.href;
+                    Redirect('https://ecomm.one-line.com/one-ecom');
+                }
+            </script>
+            <button onclick="loaddatavalue();">Load data</button>
+        </div>
+    </div>
+    <div class="one_checkingplan booking">
+        <h2>TRACKING</h2>
+        <form id="trackform" method="get" target="_blank" action="https://ecomm.one-line.comhttps://ecomm.one-line.com/one-ecom/manage-shipment/cargo-tracking?sessLocale=en">
+            <div class="field-group">
+                <div class="one-field-icon one-field-earth">
+                    <input name="ctrack-field" id="ctrack-field" class="one-field" type="text" placeholder="Enter Booking or Container No." onfocus="this.placeholder = ' '; this.parentNode.classList.add('focus');" onblur="this.placeholder = 'Enter Booking or Container No.'; this.parentNode.classList.remove('focus');" required="" oninput="this.value = this.value.toUpperCase()">
+                    <input type="hidden" name="trakNoParam" id="trakNoParam">
+                </div>
+                <p>You can enter several numbers, separated by a space or comma.</p>
+            </div>
+            <div class="field-group aligned-submit">
+                <button type="submit" class="btn btn-small">Track</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+

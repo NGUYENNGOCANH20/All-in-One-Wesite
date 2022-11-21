@@ -1,0 +1,162 @@
+﻿@using static All_in_One_Wesite.Models.DataModel
+@{
+    ViewData["Title"] = "Spanx Page";
+    Scmvhttp modelscm = ViewBag.Scm;
+    Topsystem topsystem = ViewBag.Topsystem;
+    List<string> jlist = new List<string> { "STS", "", "Create Date", "Customer", "Term", "Place of Receipt", "Des code", "Carrier","FWD", "Vessel", "Voyage", "Bill", "Load Port", "Current ETD", "Current ATD", "Disch Port", "Current ETA", "Equipment Type/Qty" };
+    string display = ViewBag.display;
+    var stsitem = ViewBag.Sts;
+}
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="~/css/StyleSheet_Spanx.css" >
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/js/site.js"></script>
+</head>
+<body>
+<div class="header">
+        <h1><b>SPANX</b></h1>
+</div>
+<div class="topnav">
+  <button onclick="Submit('https://spanx.ngcxpress.com/logon.aspx')">Login SCM System</button>
+  <button style="display:@display;" onclick="Submit('https://v15.topocean.com/WebBooking/BookingList.asp')">Login Top Ocean</button>
+  <button type="button" style="display:@display;" width="300px"  height="250px" onclick="tableToExcel('top','top','Repost Top Ocean');">Export Excel File</button>
+  <button onclick="history.back();">Back Home</button>
+</div>
+<div class="row">
+        <div class="column side">
+            <div class="chartdonut">
+                <h1>Welcome @username</h1>
+                <p>Status shipping for @stsitem[0].Key: @DateTime.Now.Month / @DateTime.Now.Year</p>
+                <hr>
+                <canvas id="myChart"></canvas>
+                <script>
+                    const ctx = document.getElementById('myChart');
+                    const myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: [
+                                'Shipped',
+                                'Ship on time',
+                                'Pending Booking Confirm'
+                            ],
+                            datasets: [{
+                                label: 'Ship Status',
+                                data: [@stsitem[0].Value[0], @stsitem[0].Value[1], @stsitem[0].Value[2]],
+                                backgroundColor: [
+                                    'rgb(255, 99, 132)',
+                                    'rgb(255, 205, 86)',
+                                    'rgb(54, 162, 235)'
+                                ],
+                                hoverOffset: 4
+                            }]
+                        },
+                        options: {}
+                    });
+                </script>
+            </div>
+            <div class="scm" style="display:@display">
+                <table border="1">
+                    <tr>
+                        <th style="display:@display" colspan="1">List Shipment Open SCM</th>
+                        <th colspan="2">Document</th>
+                    </tr>
+                    @{
+                        foreach (var item in modelscm.listdata)
+                        {
+                            string id = item.Link.Split('=')[2];
+                            string sesion = item.Link.Split('/')[5];
+                            string PKL = $"https://Spanx.ngcxpress.com/pages/aspx/{sesion}/SSRSDashboard.aspx?id_optionmenu=295&idShipment={id}&printCDF=1&drilldown=true";
+                            string ECI = $"https://Spanx.ngcxpress.com/pages/aspx/{sesion}/SSRSDashboard.aspx?id_optionmenu=292&idShipment={id}&printCDF=1&printSetStyle=1&drilldown=true";
+                                <tr>
+                                    <td style="display:@display">
+                                        <a onclick="window.open('@item.Link');">Shipment SCM number : @item.ID</a>
+                                    </td>
+                                    <td>
+                                        <a href="@ECI">CI:@item.ID</a>
+                                    </td>
+                                    <td>
+                                        <a href="@PKL">E PKL:@item.ID</a>
+                                    </td>
+                                </tr>
+                        }
+                    }
+                </table>
+            </div>
+        </div>
+        <div class="column middle" >
+            <div class="top" style="display:@display" id="top" name ="top">
+                <table border="1">
+                    <tr>
+                        <th colspan="1">
+                            Top Ocean Booking
+                        </th>
+                        @{
+                            foreach(var item in jlist){
+                                                                <th colspan="1">
+                                                                    <p>@item</p>
+                                                                </th>
+                            }
+                            
+                        }
+                    </tr>
+                    @{
+                        foreach (var item in Topsystem.list100)
+                        {
+                            string link = $"https://v15.topocean.com/WebBooking/BookingDetail.asp?BookingReqID={@item.idurl.Split('>')[1]}";
+                                                            <tr>
+                                                                <td>
+
+                                                                    <a onclick="window.open('@link');">@item.idurl.Split('>')[1]</a>
+                                                                </td>
+                                                                @{
+                                    foreach (var ivek in item.vstring)
+                                    {
+                                                                                                        <td>
+                                                                                                            <p>@ivek</p>
+                                                                                                        </td>
+                                    }
+                                                                 }
+                                                            </tr>
+                        }
+                     }
+                        </table>
+                    </div>
+            </div>
+            @{
+                if(display=="none"){
+                    <div class="scm" style="display:block;width:80%;">
+                        <table border="1">
+                            <tr>
+                                <th style="display:@display" colspan="1">List Shipment Open SCM</th>
+                                <th colspan="2">Document</th>
+                            </tr>
+                            @{
+                                foreach (var item in modelscm.listdata)
+                                {
+                                    string id = item.Link.Split('=')[2];
+                                    string sesion = item.Link.Split('/')[5];
+                                    string PKL = $"https://Spanx.ngcxpress.com/pages/aspx/{sesion}/SSRSDashboard.aspx?id_optionmenu=295&idShipment={id}&printCDF=1&drilldown=true";
+                                    string ECI = $"https://Spanx.ngcxpress.com/pages/aspx/{sesion}/SSRSDashboard.aspx?id_optionmenu=292&idShipment={id}&printCDF=1&printSetStyle=1&drilldown=true";
+                                                                    <tr>
+                                                                        <td style="display:@display">
+                                                                            <a onclick="window.open('@item.Link');">Shipment SCM number : @item.ID</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="@ECI">CI:@item.ID</a>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="@PKL">E PKL:@item.ID</a>
+                                                                        </td>
+                                                                    </tr>
+                                }
+                            }
+                        </table>
+                    </div>
+            }
+            }
+        </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Carriers Page";
+}
+<html>
+    <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/css/StyleSheet_Carrie.css">
+    </head>
+    <body>
+
+    <div class="header">
+        <h1>My Website</h1>
+    </div>
+    <div class="topnav">
+        <a onclick="document.getElementById('link_v').src ='https://www.searates.com/container/tracking/';">Checking Container Schedule</a>
+        <a onclick="document.getElementById('link_v').src ='https://www.pier2pier.com/loadcalc/';">Test Loading 3D</a>
+        <a onclick="document.getElementById('link_v').src ='./ContainerPKL';">Download PKL Container Form</a>
+        <a asp-action="Home" asp-controller="Home" style="float:right">Back Home</a>
+    </div>
+    <div class="row">
+        <div class="leftcolumn">
+            <div class="card">
+                <h2>Guide Line</h2>
+                <p>Click and select Job Value</p>
+            </div>
+            <div class="card" width="100%">
+                <h2>Application</h2>
+                <iframe class="link" id="link_v" width="100%" height="800px" src="" scrolling="No" frameborder="0" webkitallowfullscreen="true" mozallowfullscreen="true" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+        <div class="rightcolumn">
+            <div class="card">
+                <h2>DELTAGALIL VIET NAM</h2>
+                <div class="fakeimg" style="height:100px;">Image</div>
+                <p>CAT TRINH - PHU CAT - BINH DINH / DATE TIME: @DateTime.Now</p>
+            </div>
+            <div class="card">
+                <h3>Supply Chain</h3>
+                <div class="fakeimg"><img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fcorporatefinanceinstitute.com%2Fresources%2Fknowledge%2Fstrategy%2Fsupply-chain%2F&psig=AOvVaw1m-wsfeqUqQ0pi4bsp_Lax&ust=1665150459689000&source=images&cd=vfe&ved=0CAkQjRxqFwoTCLCZmILfy_oCFQAAAAAdAAAAABAD"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <h2>Admin: Nguyen Ngoc Anh _ Phone: 0898192230</h2>
+    </div>
+    </body>
+</html>

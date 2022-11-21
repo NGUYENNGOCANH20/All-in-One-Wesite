@@ -1,0 +1,133 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial;
+    padding: 10px;
+    background: #f1f1f1;
+}
+
+/* Tạo kiểu cho Tiêu đề */
+.header {
+    padding: 30px;
+    text-align: center;
+    background: white;
+}
+
+    .header h1 {
+        font-size: 50px;
+    }
+
+/*Tạo kiểu cho thanh điều hướng */
+.topnav {
+    overflow: hidden;
+    background-color: #333;
+}
+
+    /* Tạo kiểu cho liên kết */
+    .topnav a {
+        float: left;
+        display: block;
+        color: #f2f2f2;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+        /* đổi màu khi di chuột qua */
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+
+/* Tạo hai cột nằm cạnh nhau */
+/* cột bên trái */
+.leftcolumn {
+    float: left;
+    width: 85%;
+}
+
+/* cột bên phải */
+.rightcolumn {
+    float: left;
+    width: 15%;
+    background-color: #f1f1f1;
+    padding-left: 20px;
+}
+
+/* hình ảnh */
+.fakeimg {
+    background-color: #aaa;
+    width: 100%;
+    padding: 20px;
+}
+
+/*Thêm hiệu ứng thẻ cho bài viết*/
+.card {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+/* xóa các phần tử nổi sau các cột */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* chân trang */
+.footer {
+    padding: 20px;
+    text-align: center;
+    background: #ddd;
+    margin-top: 20px;
+}
+
+/* Bố cục đáp ứng - khi màn hình có chiều rộng dưới 800px, đặt hai cột chồng lên nhau thay vì cạnh nhau */
+@media screen and (max-width: 800px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
+}
+
+/* Bố cục đáp ứng - khi màn hình rộng dưới 400px, đặt các liên kết điều hướng chồng lên nhau thay vì cạnh nhau */
+@media screen and (max-width: 400px) {
+    .topnav a {
+        float: none;
+        width: 100%;
+    }
+}
+div {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+    line-height: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-style: inherit;
+}
+.col-md-9 {
+    position: relative;
+    min-height: 1px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+@media (min-width: 992px) .col-md-9 {
+    float:left;
+}
+@media (min-width: 992px) .col-md-9 {
+    width: 75%;
+}
+
+
+
+
+

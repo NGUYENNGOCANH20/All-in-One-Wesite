@@ -1,0 +1,84 @@
+﻿@using static All_in_One_Wesite.Models.DataModel
+@{
+    ViewData["Title"] = "BU Page";
+    Scmvhttp sc = new Scmvhttp();
+    string data = sc.dataviewBU;
+
+}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="~/css/StyleSheet_Spanx.css">
+    <script src="~/js/site.js"></script>
+    <style>
+        .actionIcon
+        {
+            background-color: black;
+        }
+    </style>
+    <script>
+        window.onload=function(){
+            var tdch = document.getElementsByTagName('td');
+            for (let index = 0; index < tdch.length; index++) {
+                if (tdch[index].outerHTML == '<td></td>') {
+                    tdch[index].style.display = 'none';
+                }
+            }
+            var thch = document.getElementsByTagName('th');
+            for (let index = 0; index < thch.length; index++) {
+                if (thch[index].outerHTML == '<th colspan="1"></th>') {
+                    thch[index].style.display = 'none';
+                }
+            }
+        };
+    </script>
+</head>
+<body>
+    <div class="header">
+        <h1><b>SPANX</b></h1>
+    </div>
+    <div class="topnav">
+        <button onclick="Submit('https://spanx.ngcxpress.com/logon.aspx')">Login SCM System</button>
+        <button type="button" width="300px" height="250px" onclick="tableToExcel('butable','butable','Repost PO Scm');">Export Excel File</button>
+        <button onclick="history.back();">Back Home</button>
+    </div>
+    <div class="column middle">
+        <h1 style="text-align:left;font-size:20px;color:red">Thông tin được lấy trực tiếp từ Website của khách hàng (Mang tính tham khảo)</h1>
+        <table border="1" name="butable" id="butable">
+            <tr>
+                @{
+                    string vl ="Ship Date;;;;PO;;Style;;Season;;Description;;Factory;;Quantity;;Factory Name;;Vendor Name;;Destination;;Destination Name;;Color";
+                    foreach (var item in vl.Split(';'))
+                    {
+                            <th colspan="1">@item</th>
+                    }
+                }
+            </tr>
+            @{
+                var table = from itemv in data.Split('<') where itemv.Contains("td") select itemv.Split('>')[1];
+                string line = "";
+                foreach (var item in table)
+                {
+                    if (item.Contains("/") && item.Split("/").GetLength(0) == 3 && item != " " && item != "\n" && item != "\t" && item != "\r")
+                    {
+                        line = line + "|" + item + ";";
+                    }else{
+                        line = line + item + ";";
+                    }
+                }
+                foreach(var item in line.Split('|')){
+                        <tr>
+                        @{
+                        foreach (var itemv in item.Split(';'))
+                        {
+                                   <td>@itemv</td> 
+                        }
+                        }
+                        </tr>
+                }
+            }
+        </table>
+    </div>
+</body>
+</html>
