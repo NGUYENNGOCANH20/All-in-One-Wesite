@@ -44,6 +44,14 @@ namespace All_in_One_Wesite.Controllers
         {
             DataModel.username = "";
             DataModel.password = "";
+            if (DateTime.Now.Minute % 2 == 0)
+            {
+                return RedirectToRoute(new { controller = "Login", action = "Index" });
+            }
+            return View();
+        }
+        public IActionResult Index()
+        {
             return View();
         }
     }

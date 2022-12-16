@@ -53,13 +53,16 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView4 = new System.Windows.Forms.DataGridView();
-            this.dataSet4 = new Windows_application.DataSet4();
-            this.stsBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.stsTableAdapter = new Windows_application.DataSet4TableAdapters.StsTableAdapter();
             this.brandDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyShipDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyBookingCfDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.qtyPendingDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.stsBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet4 = new Windows_application.DataSet4();
+            this.stsTableAdapter = new Windows_application.DataSet4TableAdapters.StsTableAdapter();
+            this.dataGridView5 = new System.Windows.Forms.DataGridView();
+            this.dataSet6 = new Windows_application.DataSet6();
+            this.dataSet6BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.shipmentSCMBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet3)).BeginInit();
@@ -70,8 +73,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.saleBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.stsBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet6BindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -252,25 +258,11 @@
             this.qtyBookingCfDataGridViewTextBoxColumn,
             this.qtyPendingDataGridViewTextBoxColumn});
             this.dataGridView4.DataSource = this.stsBindingSource;
-            this.dataGridView4.Location = new System.Drawing.Point(12, 335);
+            this.dataGridView4.Location = new System.Drawing.Point(759, 12);
             this.dataGridView4.Name = "dataGridView4";
             this.dataGridView4.ReadOnly = true;
             this.dataGridView4.Size = new System.Drawing.Size(445, 82);
             this.dataGridView4.TabIndex = 6;
-            // 
-            // dataSet4
-            // 
-            this.dataSet4.DataSetName = "DataSet4";
-            this.dataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // stsBindingSource
-            // 
-            this.stsBindingSource.DataMember = "Sts";
-            this.stsBindingSource.DataSource = this.dataSet4;
-            // 
-            // stsTableAdapter
-            // 
-            this.stsTableAdapter.ClearBeforeFill = true;
             // 
             // brandDataGridViewTextBoxColumn
             // 
@@ -300,11 +292,46 @@
             this.qtyPendingDataGridViewTextBoxColumn.Name = "qtyPendingDataGridViewTextBoxColumn";
             this.qtyPendingDataGridViewTextBoxColumn.ReadOnly = true;
             // 
+            // stsBindingSource
+            // 
+            this.stsBindingSource.DataMember = "Sts";
+            this.stsBindingSource.DataSource = this.dataSet4;
+            // 
+            // dataSet4
+            // 
+            this.dataSet4.DataSetName = "DataSet4";
+            this.dataSet4.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // stsTableAdapter
+            // 
+            this.stsTableAdapter.ClearBeforeFill = true;
+            // 
+            // dataGridView5
+            // 
+            this.dataGridView5.AutoGenerateColumns = false;
+            this.dataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView5.DataSource = this.dataSet6BindingSource;
+            this.dataGridView5.Location = new System.Drawing.Point(759, 112);
+            this.dataGridView5.Name = "dataGridView5";
+            this.dataGridView5.Size = new System.Drawing.Size(445, 202);
+            this.dataGridView5.TabIndex = 7;
+            // 
+            // dataSet6
+            // 
+            this.dataSet6.DataSetName = "DataSet6";
+            this.dataSet6.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataSet6BindingSource
+            // 
+            this.dataSet6BindingSource.DataSource = this.dataSet6;
+            this.dataSet6BindingSource.Position = 0;
+            // 
             // Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 439);
+            this.ClientSize = new System.Drawing.Size(1243, 351);
+            this.Controls.Add(this.dataGridView5);
             this.Controls.Add(this.dataGridView4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
@@ -323,8 +350,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.saleBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.stsBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet6BindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,6 +393,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyShipDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyBookingCfDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn qtyPendingDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridView dataGridView5;
+        private System.Windows.Forms.BindingSource dataSet6BindingSource;
+        private DataSet6 dataSet6;
     }
 }
 
